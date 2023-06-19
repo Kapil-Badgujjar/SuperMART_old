@@ -1,0 +1,17 @@
+.button-type-1{
+    color: white;
+    background-color: blue;
+    border: none;
+    outline: none;
+    margin: 0px auto;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 10px 36px;
+    font-size: 1rem;
+    &:hover {
+        opacity: 0.8;
+    }
+    &:active{
+        opacity: 0.6;
+    }
+}
