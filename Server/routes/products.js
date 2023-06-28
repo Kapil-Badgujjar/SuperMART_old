@@ -35,14 +35,13 @@ router.post('/singleproduct',async (req,res)=>{
     }
     });
 
-router.post('/add-product', upload.single('image'), async (req,res)=>{
-    req.body.imageSource = req.file.filename;
+router.post('/add-product', async (req,res)=>{
     console.log(req.body);
     let product = req.body;
-    if(product.name == undefined||product.displayName == undefined||product.price == undefined||product.color == undefined||product.description == undefined||product.availableStocks == undefined|| req.file == undefined){
+    if(product.name == undefined||product.displayName == undefined||product.price == undefined||product.color == undefined||product.description == undefined||product.availableStocks == undefined){
         res.status(200).send({message: 'Please fill values properly'});
     }else{
-        const response = await addProduct(product,req.file.filename);
+        const response = await addProduct(product);
         res.end('Successfully added product');
     }
 });

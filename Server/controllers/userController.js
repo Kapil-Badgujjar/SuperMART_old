@@ -1,6 +1,6 @@
 const getUsers = require('../services/getUser');
 const customQuery = require('../services/customQuery');
-const { activateChangeRequest, changePassword } = require('../services/manageUsers')
+const { activateChangeRequest, changePassword, createNewUser } = require('../services/manageUsers')
 async function verifyUser(session,email,password){
     try{
         users = await getUsers(email,password);
@@ -20,15 +20,9 @@ async function verifyUser(session,email,password){
     return -1;
 }
 async function addUser(obj){
-    let fileData = await customQuery(`SELECT * FROM AuthenticationTable where emailID = '${obj.email}'`);
-    if(fileData.length==1) return false;
-    try{
-        await customQuery(`INSERT INTO AuthenticationTable(userName,emailID,password,isVerified,passwordResetRequest,mailToken,role) values('${obj.username}','${obj.email}','${obj.password}',0,0,'${obj.mailToken}','User')`);
-        return true;
-    }catch(err){
-        console.log(err.message);
-    }
-    return false;
+    // let fileData = await customQuery(`SELECT * FROM AuthenticationTable where emailID = '${obj.email}'`);
+    // if(fileData.length==1) return false;
+    return createNewUser(obj);
 }
 
 async function forgotPassword(email){
