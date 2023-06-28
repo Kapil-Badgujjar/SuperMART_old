@@ -25,7 +25,7 @@ Server.use(express.json());
 
 
 Server.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://super-mart-zeta.vercel.app',
     credentials: true
 }))
 
