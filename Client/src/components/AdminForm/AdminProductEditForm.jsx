@@ -37,7 +37,7 @@ export default function ProductForm({btnName, flag}) {
                 console.log(formData)
                 try {
                     console.log(flag)
-                    const {data} = await axios.post(flag ? 'http://localhost:5000/products/Update-product' : 'http://localhost:5000/products/add-product' ,formData,{
+                    const {data} = await axios.post(flag ? 'https://super-mart-backend.vercel.app/products/Update-product' : 'https://super-mart-backend.vercel.app/products/add-product' ,formData,{
                         headers: {
                             'Content-Type': 'application/json'
                           },    
@@ -58,7 +58,7 @@ export default function ProductForm({btnName, flag}) {
         }
         async function deleteFun(event){
             event.preventDefault();
-            const {data} = await axios.post('http://localhost:5000/products/delete-product' ,{productID: productDetails.productID}, {withCredentials: true});
+            const {data} = await axios.post('https://super-mart-backend.vercel.app/products/delete-product' ,{productID: productDetails.productID}, {withCredentials: true});
             navigate('/admin');
         }
     return (
