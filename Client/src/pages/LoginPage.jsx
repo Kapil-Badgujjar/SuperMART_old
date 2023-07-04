@@ -19,7 +19,7 @@ export default function LoginPage() {
   async function login(event) {
     event.preventDefault();
     if(email.trim().length > 0 && userPassword.trim().length > 0) {
-      const {data} = await axios.post(`https://super-mart-backend.vercel.app/user/login`,{email: email, password: userPassword},{withCredentials: true});
+      const {data} = await axios.post(`http://localhost:5000/user/login`,{email: email, password: userPassword},{withCredentials: true});
       console.log(data);
       if( data.code == 0) {
         setUserName(data.username);

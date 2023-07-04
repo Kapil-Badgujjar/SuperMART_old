@@ -9,7 +9,7 @@ export default function ForgotPasswordPage() {
     function forgotPassword(event){
         event.preventDefault();
         async function fun(){
-            const {status,data} = await axios.post(`https://super-mart-backend.vercel.app/user/forgotPassword`,{email: email},{withCredentials: true});
+            const {status,data} = await axios.post(`http://localhost:5000/user/forgotPassword`,{email: email},{withCredentials: true});
             if(status==200){
                 navigate('/login');
             }
