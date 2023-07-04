@@ -12,7 +12,7 @@ const {db} = require('@vercel/postgres')
 
 async function customQuery(query){
   const client = await db.connect();
-  const result = await client.sql``+query;
+  const result = await client.sql`${query}`;
   return result.rows;
 }
 module.exports = customQuery;
