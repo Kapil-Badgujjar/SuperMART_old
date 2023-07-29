@@ -16,7 +16,7 @@ export default function SingleProduct() {
     const navigate = useNavigate();
     useEffect(() =>{
         async function fun(){
-        const {data} = await axios.post('https://super-mart-backend.vercel.app/products/singleproduct',{productID: id},{withCredentials: true})
+        const {data} = await axios.post('http://localhost:5000/products/singleproduct',{productID: id},{withCredentials: true})
             setProduct(data);
         }
         fun();
@@ -25,7 +25,7 @@ export default function SingleProduct() {
       async function addToCart(){
         if(loginCode !=1) navigate('/login');
         else{
-        const {status,data} = await axios.post('https://super-mart-backend.vercel.app/cart/addtocart',{productID: id, userID: userID},{withCredentials: true})
+        const {status,data} = await axios.post('http://localhost:5000/cart/addtocart',{productID: id, userID: userID},{withCredentials: true})
           if(status == 200){
             setMsg(true);
             setTimeout(()=>{
@@ -44,11 +44,11 @@ export default function SingleProduct() {
     <div className={Style.container}>
       <div className={Style.innercontainer}>
       <div className={Style.left}>
-      {product && <img src={"https://super-mart-backend.vercel.app/" + product.imageSource} />}
+      {product && <img src={product.imagesource} />}
       </div>
       <div className={Style.right}>
         <div className={Style.name}>
-        <p>{product?.displayName}</p>
+        <p>{product?.displayname}</p>
         </div>
         <div className={Style.desc}>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident molestias expedita perspiciatis nemo omnis voluptatibus et ad minus quo libero deserunt, repellat vel tenetur temporibus minima. Laudantium aut praesentium maiores mollitia reprehenderit incidunt reiciendis quibusdam eos cum quos sed et voluptatibus quisquam, quas, placeat omnis ad qui ab. Totam, perspiciatis.</p>

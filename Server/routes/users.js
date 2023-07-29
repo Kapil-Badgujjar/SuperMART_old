@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const {verifyUser, addUser, activatePasswordReset, resetAccountPassword, forgotPassword } = require('../controllers/userController');
-const verifyEmail = require('../controllers/verifyEmail');
-const { updatePassword } = require('../services/manageUsers')
+// const verifyEmail = require('../controllers/verifyEmail');
+const { updatePassword, verifyEmail } = require('../services/manageUsers')
 const sendMail = require('../utils/signupMail');
 const passwordResetEmail = require('../utils/passwordResetEmail');
 const router = express.Router();
@@ -114,9 +114,9 @@ router.route('/resetPassword').post(async (req,res)=>{
 router.get('/verifyEmail/:token', async (req,res)=>{
     const { token } = req.params;
     if(await verifyEmail(token)){
-        res.send('Email verified');
+        res.status(200).send('Email verified');
     }else{
-        res.send('Some Error occurred');
+        res.status(200).send('Some Error occurred');
     }
 });
 

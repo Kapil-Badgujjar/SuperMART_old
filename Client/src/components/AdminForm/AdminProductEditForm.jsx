@@ -30,14 +30,14 @@ export default function ProductForm({btnName, flag}) {
         function submitFunction(event){
             event.preventDefault();
             const formData= new FormData(formRef.current);
-            // formData.append('productID', productDetails.productID);
-            formData.append('sellerID', productDetails.sellerID);
+            formData.append('productID', productDetails.id);
+            formData.append('sellerID', productDetails.sellerid);
 
             async function fun(){  
                 console.log(formData)
                 try {
                     console.log(flag)
-                    const {data} = await axios.post(flag ? 'https://super-mart-backend.vercel.app/products/Update-product' : 'https://super-mart-backend.vercel.app/products/add-product' ,formData,{
+                    const {data} = await axios.post(flag ? 'http://localhost:5000/products/Update-product' : 'http://localhost:5000/products/add-product' ,formData,{
                         headers: {
                             'Content-Type': 'application/json'
                           },    
@@ -56,9 +56,9 @@ export default function ProductForm({btnName, flag}) {
             }      
             fun();  
         }
-        async function deleteFun(event){
-            event.preventDefault();
-            const {data} = await axios.post('https://super-mart-backend.vercel.app/products/delete-product' ,{productID: productDetails.productID}, {withCredentials: true});
+        async function deleteFun(ev){
+            ev.preventDefault();
+            await axios.post('http://localhost:5000/products/delete-product' ,{productID: productDetails.id}, {withCredentials: true});
             navigate('/admin');
         }
     return (
@@ -70,7 +70,7 @@ export default function ProductForm({btnName, flag}) {
             <input type="text" placeholder='Color' name="color" onChange={(e)=>{setColor(e.target.value);}} value={color}/>
             <input type="text" placeholder='Description' name="description" onChange={(e)=>{setDescription(e.target.value);}} value={description}/>
             <input type="number" placeholder='Quantity' name="availableStocks" onChange={(e)=>{setQuantity(e.target.value);}} value={quantity}/>
-            <input type="text" placeholder='Image Url' name="imageSource" onChange={(e)=>{setImage(e.target.value);}}/>
+            <input type="text" placeholder='Image Url' name="imageSource" onChange={(e)=>{setImage(e.target.value);}} value={image} />
             <input type="submit" value={btnName}/>
             {flag && <input type="button" onClick={(ev)=>deleteFun(ev)} value="Delete"/> }
             {!flag && <input type="button" onClick={(ev)=> resetForm(ev)} value="Reset Form"/>}

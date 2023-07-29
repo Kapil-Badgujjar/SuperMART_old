@@ -1,22 +1,25 @@
-// const sql = require('mssql');
-// const configuration = require('./DatabaseConfiguration');
-const {db} = require('@vercel/postgres')
-async function getProducts(all,x,productID){
-  // const pool = await sql.connect(configuration);
+const { db } = require('@vercel/postgres');
+
+async function getProducts(all, x, id) {
   const client = await db.connect();
   let result = undefined;
-  if(all){
-    result = await client.sql`SELECT * FROM products`;
-    // result = await pool.request().query(`SELECT * FROM productsTable`);
-  }else if(x==undefined){
-    result = await client.sql`SELECT * FROM products WHERE productID = ${productID}`;
-    // result = await pool.request().query(`SELECT * FROM productsTable WHERE productID = '${productID}'`);
-  }else{
-    result = await client.sql`SELECT * FROM products ORDER BY productID OFFSET ${x*5} ROWS FETCH NEXT 5 ROWS ONLY`;
-    // result = await pool.request().query(`SELECT * FROM productsTable ORDER BY productID OFFSET ${x*5} ROWS FETCH NEXT 5 ROWS ONLY`);
+  try {
+    if (all) {
+      result = await client.query('SELECT * FROM products');
+    } else if (x === undefined) {
+      result = await client.query('SELECT * FROM products WHERE id = $1', [id]);
+    } else {
+      const offset = x * 5;
+      result = await client.query('SELECT * FROM products ORDER BY id OFFSET $1 ROWS FETCH NEXT 5 ROWS ONLY', [offset]);
+    }
+    console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.log(error.message);
+    throw error; // Re-throw the error to be caught by the caller if needed.
+  } finally {
+    client.release(); // Release the database client connection after the query is executed.
   }
-  // await pool.close();
-  // return result.recordset;
-  return result.rows;
 }
+
 module.exports = getProducts;

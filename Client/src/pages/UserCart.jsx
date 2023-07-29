@@ -15,15 +15,16 @@ export default function UserCart() {
   useEffect(() =>{
     if(loginCode!=1) navigate('/login');
     async function fun(){
-      const {status,data} = await axios.post('https://super-mart-backend.vercel.app/cart/getUserCart',{userID: userID},{withCredentials: true})
-        if(status == 200){
-          if(data.length > 0){
+      const response = await axios.get('http://localhost:5000/cart/getUserCart',{withCredentials: true});
+      console.log(response);
+        if(response.status == 200){
+          if(response.data.length > 0){
             setIsEmpty(false);
           }
           else{
             setIsEmpty(true);
           }
-          setCartProducts(data);
+          setCartProducts(response.data);
         }
       }
       fun();
@@ -31,15 +32,15 @@ export default function UserCart() {
   },[]);
   useEffect(() =>{
     async function fun(){
-      const {status,data} = await axios.post('https://super-mart-backend.vercel.app/cart/getUserCart',{userID: userID},{withCredentials:true});
-        if(status == 200){
-          if(data.length > 0){
+      const response = await axios.get('http://localhost:5000/cart/getUserCart',{withCredentials:true});
+        if(response.status == 200){
+          if(response.data.length > 0){
             setIsEmpty(false);
           }
           else{
             setIsEmpty(true);
           }
-          setCartProducts(data);
+          setCartProducts(response.data);
         }
     }
   fun();
@@ -48,7 +49,7 @@ export default function UserCart() {
   const handlePayment = async () => {
     console.log('Payment cliked');
       try{
-          const {data} = await axios.post("https://super-mart-backend.vercel.app/payments/create-payment-session",{userID: userID},{withCredentials:true});
+          const {data} = await axios.post("http://localhost:5000/payments/create-payment-session",{userID: userID},{withCredentials:true});
           console.log(data);
           window.location.href = data.url;
       }

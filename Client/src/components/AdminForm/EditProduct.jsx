@@ -21,18 +21,18 @@ export default function EditProduct() {
       navigate('/login');
     }
     async function fun(){
-      const {status, data} = await axios.post('https://super-mart-backend.vercel.app/products/singleproduct',{productID: id},{withCredentials: true});
+      const {status, data} = await axios.post('http://localhost:5000/products/singleproduct',{productID: id},{withCredentials: true});
       if(status==200)  
         {
           console.log(data);
           setProductDetails(data);
           setName(data.name)
-          setDisplayName(data.displayName);
+          setDisplayName(data.displayname);
           setPrice(data.price);
           setColor(data.color);
           setDescription(data.description);
-          setQuantity(data.availableStocks);
-          setImage(data.imageSource);
+          setQuantity(data.availablestocks);
+          setImage(data.imagesource);
         }
     }
     fun();

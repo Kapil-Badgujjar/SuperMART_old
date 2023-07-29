@@ -1,6 +1,6 @@
 const express = require('express');
 // const app = express();
-const multer = require('multer');
+// const multer = require('multer');
 // const bodyParser = require('body-parser');
 const fetchProducts = require('../controllers/productsController');
 const { addProduct, updateProduct, deleteProduct } = require('../services/manageProducts');
@@ -8,16 +8,16 @@ const router = express.Router();
 
 // app.use(bodyParser.urlencoded({extended: true}));
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-         cb(null,'assets/images');
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//          cb(null,'assets/images');
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, `${Date.now()}-${file.originalname}`);
+//     }
+// });
 
-const upload = multer({storage: storage});
+// const upload = multer({storage: storage});
 
 router.get('/get-products',async (req,res)=>{
     let products = await fetchProducts.getAllProducts();
@@ -52,18 +52,10 @@ router.post('/add-product', async (req,res)=>{
 //     res.json(product);
 // });
 
-router.post('/update-product', upload.single('image'),async (req,res)=>{
+router.post('/update-product',async (req,res)=>{
     console.log(req.body);
     let product = req.body;
-    let flag;
-    if(req.file!=undefined) { req.body.imageSource = req.file.filename; flag = await updateProduct(req.body,req.file.filename); }
-    else {
-        // if(product.name == undefined||product.displayName == undefined||product.price == undefined||product.color == undefined||product.description == undefined||product.quantity == undefined){
-        //     res.render('adminpage',{active:true, errormsg:'Please enter proper values!', status: 1, msg: 5});
-        //     return;
-        // }else
-            flag = await updateProduct(product,undefined);
-    }
+    let flag = await updateProduct(product);
     if(flag){
         res.statusCode = 200;
         res.end('Successfully updated product');

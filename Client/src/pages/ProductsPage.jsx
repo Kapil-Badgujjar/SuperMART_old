@@ -19,7 +19,8 @@ export default function ProductsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://super-mart-backend.vercel.app/products/get-products",{withCredentials: true});
+        // const response = await axios.get("https://super-mart-backend.vercel.app/products/get-products",{withCredentials: true});
+        const response = await axios.get("http://localhost:5000/products/get-products",{withCredentials: true});
         setProducts(response.data);
       } catch (error) {
         console.log(error.message);
@@ -34,7 +35,7 @@ export default function ProductsPage() {
       <Banner />
       <div className="products-container">
         {products.map((product) => {
-          return <Product key={product.productID + "P"} product={product} flag={true}/>;
+          return <Product key={product.id + "P"} product={product} flag={true}/>;
         })}
       </div>
     </>
