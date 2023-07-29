@@ -27,12 +27,12 @@ export default function EditProduct() {
           console.log(data);
           setProductDetails(data);
           setName(data.name)
-          setDisplayName(data.displayName);
+          setDisplayName(data.displayname);
           setPrice(data.price);
           setColor(data.color);
           setDescription(data.description);
-          setQuantity(data.availableStocks);
-          setImage(data.imageSource);
+          setQuantity(data.availablestocks);
+          setImage(data.imagesource);
         }
     }
     fun();

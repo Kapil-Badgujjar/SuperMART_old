@@ -23,10 +23,16 @@ export default function SignupPage() {
         return;
     }
     async function requsetSignup(){
-      const response = await axios.post(`http://localhost:5000/user/signup`,{email: email, username: newUserName, password: userPassword},{withCredentials: true}); 
-      if(response.status === 200) {
-        navigate('/login');
+      try {
+        const response = await axios.post(`http://localhost:5000/user/signup`,{email: email, username: newUserName, password: userPassword},{withCredentials: true}); 
+        if(response.status === 200) {
+          navigate('/login');
+        }
+
+      } catch (error) {
+        console.log(error);
       }
+
     }
     requsetSignup();
 }

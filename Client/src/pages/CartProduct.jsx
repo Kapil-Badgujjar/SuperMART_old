@@ -29,16 +29,16 @@ export default function Product({product, update, setUpdate}) {
     };
   return (
     <div className="list" >
-        <img src={"http://localhost:5000/" + product.imageSource} />
+        <img src={product.imagesource} />
         <div className="details">
-            <p>{product.displayName}</p>
+            <p>{product.displayname}</p>
             <p>Price: {product.price}</p>
         </div>
         <div className="quantity">
-            <button onClick={()=>{updateQuantity(product.productID,false)}}>-</button>
-            <span>{quantity}</span>
-            <button onClick={()=>{updateQuantity(product.productID,true)}} >+</button>
-            <button onClick={()=>{removeProduct(product.productID)}}>Remove</button>
+            <button onClick={()=>{updateQuantity(product.id,false)}}>-</button>
+            <span>{product.quantity}</span>
+            <button onClick={()=>{updateQuantity(product.id,true)}} >+</button>
+            <button onClick={()=>{removeProduct(product.id)}}>Remove</button>
         </div>
     </div>
   )

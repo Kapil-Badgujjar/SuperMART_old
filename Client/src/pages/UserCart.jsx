@@ -15,15 +15,16 @@ export default function UserCart() {
   useEffect(() =>{
     if(loginCode!=1) navigate('/login');
     async function fun(){
-      const {status,data} = await axios.post('http://localhost:5000/cart/getUserCart',{userID: userID},{withCredentials: true})
-        if(status == 200){
-          if(data.length > 0){
+      const response = await axios.get('http://localhost:5000/cart/getUserCart',{withCredentials: true});
+      console.log(response);
+        if(response.status == 200){
+          if(response.data.length > 0){
             setIsEmpty(false);
           }
           else{
             setIsEmpty(true);
           }
-          setCartProducts(data);
+          setCartProducts(response.data);
         }
       }
       fun();
@@ -31,15 +32,15 @@ export default function UserCart() {
   },[]);
   useEffect(() =>{
     async function fun(){
-      const {status,data} = await axios.post('http://localhost:5000/cart/getUserCart',{userID: userID},{withCredentials:true});
-        if(status == 200){
-          if(data.length > 0){
+      const response = await axios.get('http://localhost:5000/cart/getUserCart',{withCredentials:true});
+        if(response.status == 200){
+          if(response.data.length > 0){
             setIsEmpty(false);
           }
           else{
             setIsEmpty(true);
           }
-          setCartProducts(data);
+          setCartProducts(response.data);
         }
     }
   fun();

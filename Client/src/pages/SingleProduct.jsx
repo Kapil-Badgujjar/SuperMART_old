@@ -44,11 +44,11 @@ export default function SingleProduct() {
     <div className={Style.container}>
       <div className={Style.innercontainer}>
       <div className={Style.left}>
-      {product && <img src={"http://localhost:5000/" + product.imageSource} />}
+      {product && <img src={product.imagesource} />}
       </div>
       <div className={Style.right}>
         <div className={Style.name}>
-        <p>{product?.displayName}</p>
+        <p>{product?.displayname}</p>
         </div>
         <div className={Style.desc}>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident molestias expedita perspiciatis nemo omnis voluptatibus et ad minus quo libero deserunt, repellat vel tenetur temporibus minima. Laudantium aut praesentium maiores mollitia reprehenderit incidunt reiciendis quibusdam eos cum quos sed et voluptatibus quisquam, quas, placeat omnis ad qui ab. Totam, perspiciatis.</p>

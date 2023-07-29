@@ -12,7 +12,7 @@ function signupMail(email,token){
         },
         subject: 'Verify your email',
         text: 'Verify your email',
-        html: `<h2>Click on the link below to verify email...</h2><a href="http://localhost:5000/user/verifyEmail/${token}">Click here to verify</a>`
+        html: `<h2>Click on the link below to verify email...</h2><a href="http://localhost:5173/user/verifyEmail/${token}">Click here to verify</a>`
     }
     sgMail.send(mail).then((response) => console.log('Email sent ...'))
     .catch((error)=>console.log(error.message));
