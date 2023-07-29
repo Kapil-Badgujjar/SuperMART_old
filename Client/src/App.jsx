@@ -50,7 +50,7 @@ function App() {
 
   useEffect(() => {
     async function fun(){
-    const {status, data} = await axios.get('http://localhost:5000/user/checkSessionExists',{withCredentials:true});
+    const {status, data} = await axios.get('http://super-mart-backend.vercel.app/user/checkSessionExists',{withCredentials:true});
     console.log(data);
       if(status === 200){
         setUserName(data.username);
