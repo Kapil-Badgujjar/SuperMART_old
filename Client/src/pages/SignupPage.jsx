@@ -24,7 +24,7 @@ export default function SignupPage() {
     }
     async function requsetSignup(){
       try {
-        const response = await axios.post(`http://localhost:5000/user/signup`,{email: email, username: newUserName, password: userPassword},{withCredentials: true}); 
+        const response = await axios.post(`http://super-mart-backend.vercel.app/user/signup`,{email: email, username: newUserName, password: userPassword},{withCredentials: true}); 
         if(response.status === 200) {
           navigate('/login');
         }

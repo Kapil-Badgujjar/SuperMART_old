@@ -9,7 +9,7 @@ export default function Success() {
     // const {userID} = useContext(Context);
     useEffect(()=>{
         async function fun(){
-            const {status,data} = await axios.post('http://localhost:5000/payments/order-successful', {userID: userID}, {withCredentials: true});
+            const {status,data} = await axios.post('http://super-mart-backend.vercel.app/payments/order-successful', {userID: userID}, {withCredentials: true});
             console.log(data);
             if(status!=200){
                 navigate('/cancel');

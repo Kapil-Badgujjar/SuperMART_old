@@ -16,7 +16,7 @@ export default function SingleProduct() {
     const navigate = useNavigate();
     useEffect(() =>{
         async function fun(){
-        const {data} = await axios.post('http://localhost:5000/products/singleproduct',{productID: id},{withCredentials: true})
+        const {data} = await axios.post('http://super-mart-backend.vercel.app/products/singleproduct',{productID: id},{withCredentials: true})
             setProduct(data);
         }
         fun();
@@ -25,7 +25,7 @@ export default function SingleProduct() {
       async function addToCart(){
         if(loginCode !=1) navigate('/login');
         else{
-        const {status,data} = await axios.post('http://localhost:5000/cart/addtocart',{productID: id, userID: userID},{withCredentials: true})
+        const {status,data} = await axios.post('http://super-mart-backend.vercel.app/cart/addtocart',{productID: id, userID: userID},{withCredentials: true})
           if(status == 200){
             setMsg(true);
             setTimeout(()=>{

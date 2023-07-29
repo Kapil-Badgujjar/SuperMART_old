@@ -15,14 +15,14 @@ export default function Product({product, update, setUpdate}) {
 
 
     async function updateQuantity(productId, flag){
-      const {status, data} = await axios.post('http://localhost:5000/cart/updatecart',{productID: productId, userID: userID, flag: flag},{withCredentials: true});
+      const {status, data} = await axios.post('http://super-mart-backend.vercel.app/cart/updatecart',{productID: productId, userID: userID, flag: flag},{withCredentials: true});
         if(status == 200){
           setQuantity(flag ? quantity+1 : quantity-1);
           update ? setUpdate(false) : setUpdate(true);
       }
     }
     async function removeProduct(productId){
-      const {status, data} = await axios.post('http://localhost:5000/cart/removeproduct',{productID: productId, userID: userID},{withCredentials: true});
+      const {status, data} = await axios.post('http://super-mart-backend.vercel.app/cart/removeproduct',{productID: productId, userID: userID},{withCredentials: true});
         if(status == 200){
             update ? setUpdate(false) : setUpdate(true);
       }
