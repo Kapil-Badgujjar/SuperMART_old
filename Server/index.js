@@ -25,7 +25,7 @@ Server.use(express.json());
 
 
 Server.use(cors({
-    origin: 'https://super-mart-kapil-badgujjar.vercel.app/',
+    origin: 'https://super-mart-kapil-badgujjar.vercel.app',
     credentials: true
 }))
 
