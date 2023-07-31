@@ -1,18 +1,19 @@
 import './StyleSheet.scss';
 import axios from 'axios';
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState} from 'react';
+// import { useEffect, useContext} from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-import Context from '../utils/context';
+// import Context from '../utils/context';
 import ButtonType1 from '../components/Button/ButtonType1';
 export default function SignupPage() {
     const navigate = useNavigate();
-    const {userName, setUserName} = useContext(Context);
+    // const {userName, setUserName} = useContext(Context);
     const [msg,setMsg] = useState("");
     const [email, setUserEmail] = useState("");
     const [newUserName, setNewUserName] = useState("");
     const [userPassword, setUserPassword] = useState("");
     const [userConfirmPassword, setUserConfirmPassword] = useState("");
-    const [loading,setLoading] = useState(true);
+    // const [loading,setLoading] = useState(true);
 
   function addUser(event){
     event.preventDefault();
@@ -24,7 +25,7 @@ export default function SignupPage() {
     }
     async function requsetSignup(){
       try {
-        const response = await axios.post(`http://super-mart-backend.vercel.app/user/signup`,{email: email, username: newUserName, password: userPassword},{withCredentials: true}); 
+        const response = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+`/user/signup`,{email: email, username: newUserName, password: userPassword},{withCredentials: true}); 
         if(response.status === 200) {
           navigate('/login');
         }

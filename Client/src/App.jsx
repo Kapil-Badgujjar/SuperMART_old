@@ -1,4 +1,4 @@
-import {createBrowserRouter, createRoutesFromElements, RouterProvider, Route, useNavigate} from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
 import Header from '../src/components/Header/Header'
 import LoginPage from './pages/LoginPage';
 import LogoutPage from './pages/LogoutPage';
@@ -24,7 +24,7 @@ import Context from './utils/context';
   
   
 function App() { 
-    const {userName, setUserName, userID, setUserID, loginCode, setLoginType, setLoginCode} = useContext(Context);
+    const {setUserName, setUserID, setLoginType, setLoginCode} = useContext(Context);
     const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path='/' element={<Header />}>
@@ -50,7 +50,7 @@ function App() {
 
   useEffect(() => {
     async function fun(){
-    const {status, data} = await axios.get('http://super-mart-backend.vercel.app/user/checkSessionExists',{withCredentials:true});
+    const {status, data} = await axios.get(import.meta.env.VITE_SERVER_ADDRESS+'/user/checkSessionExists',{withCredentials:true});
     console.log(data);
       if(status === 200){
         setUserName(data.username);

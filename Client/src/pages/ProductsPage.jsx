@@ -20,7 +20,7 @@ export default function ProductsPage() {
     const fetchData = async () => {
       try {
         // const response = await axios.get("https://super-mart-backend.vercel.app/products/get-products",{withCredentials: true});
-        const response = await axios.get("http://super-mart-backend.vercel.app/products/get-products",{withCredentials: true});
+        const response = await axios.get(import.meta.env.VITE_SERVER_ADDRESS+"/products/get-products",{withCredentials: true});
         setProducts(response.data);
       } catch (error) {
         console.log(error.message);

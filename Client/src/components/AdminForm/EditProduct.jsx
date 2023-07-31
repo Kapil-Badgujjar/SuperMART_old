@@ -21,7 +21,7 @@ export default function EditProduct() {
       navigate('/login');
     }
     async function fun(){
-      const {status, data} = await axios.post('http://super-mart-backend.vercel.app/products/singleproduct',{productID: id},{withCredentials: true});
+      const {status, data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+'/products/singleproduct',{productID: id},{withCredentials: true});
       if(status==200)  
         {
           console.log(data);

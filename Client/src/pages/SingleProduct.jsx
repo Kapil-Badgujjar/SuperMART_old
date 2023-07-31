@@ -6,7 +6,6 @@ import instagram from '../assets/social_media_icons/instagram.png';
 import linkedin from '../assets/social_media_icons/linkedin.png';
 import twitter from '../assets/social_media_icons/twitter.png';
 import axios from 'axios';
-import ButtonType1 from '../components/Button/ButtonType1';
 import Context from '../utils/context';
 export default function SingleProduct() {
     const {id} = useParams('id');
@@ -16,7 +15,7 @@ export default function SingleProduct() {
     const navigate = useNavigate();
     useEffect(() =>{
         async function fun(){
-        const {data} = await axios.post('http://super-mart-backend.vercel.app/products/singleproduct',{productID: id},{withCredentials: true})
+        const {data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+'/products/singleproduct',{productID: id},{withCredentials: true})
             setProduct(data);
         }
         fun();
@@ -25,7 +24,7 @@ export default function SingleProduct() {
       async function addToCart(){
         if(loginCode !=1) navigate('/login');
         else{
-        const {status,data} = await axios.post('http://super-mart-backend.vercel.app/cart/addtocart',{productID: id, userID: userID},{withCredentials: true})
+        const {status,data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+'/cart/addtocart',{productID: id, userID: userID},{withCredentials: true})
           if(status == 200){
             setMsg(true);
             setTimeout(()=>{

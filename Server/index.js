@@ -25,7 +25,7 @@ Server.use(express.json());
 
 
 Server.use(cors({
-    origin: 'https://super-mart-c56u5j6kf-kapil-badgujjar.vercel.app/',
+    origin: process.env.CLIENT_ORIGIN,
     credentials: true
 }))
 
@@ -53,5 +53,6 @@ Server.post('/',upload.single('image'),(req,res)=>{
 });
 
 Server.listen(5000,()=>{
+    console.log(process.env.CLIENT_ORIGIN);
     console.log("Server listening on port 5000");
 });

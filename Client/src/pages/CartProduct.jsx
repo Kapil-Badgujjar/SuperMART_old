@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React, {useState, useEffect, useContext} from 'react'
-import Style from './UserCart.module.css';
+// import Style from './UserCart.module.css';
 import axios from 'axios';
 import Context from '../utils/context';
 export default function Product({product, update, setUpdate}) {
@@ -15,14 +15,14 @@ export default function Product({product, update, setUpdate}) {
 
 
     async function updateQuantity(productId, flag){
-      const {status, data} = await axios.post('http://super-mart-backend.vercel.app/cart/updatecart',{productID: productId, userID: userID, flag: flag},{withCredentials: true});
+      const {status, data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+'/cart/updatecart',{productID: productId, userID: userID, flag: flag},{withCredentials: true});
         if(status == 200){
           setQuantity(flag ? quantity+1 : quantity-1);
           update ? setUpdate(false) : setUpdate(true);
       }
     }
     async function removeProduct(productId){
-      const {status, data} = await axios.post('http://super-mart-backend.vercel.app/cart/removeproduct',{productID: productId, userID: userID},{withCredentials: true});
+      const {status, data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+'/cart/removeproduct',{productID: productId, userID: userID},{withCredentials: true});
         if(status == 200){
             update ? setUpdate(false) : setUpdate(true);
       }
