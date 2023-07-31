@@ -10,7 +10,7 @@ export default function LogoutPage() {
   useEffect(() => {
     const logout = async () => {
       try {
-        const response = await axios.get('http://super-mart-backend.vercel.app/user/logout',{withCredentials: true});
+        const response = await axios.get(import.meta.env.VITE_SERVER_ADDRESS+'/user/logout',{withCredentials: true});
         if (response.status === 200) {
           console.log(response.data);
           setUserName(undefined);

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import  "./StyleSheet.scss";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -16,7 +16,7 @@ export default function UpdatePassword() {
 
   useEffect(() => {
     async function fun()
-   { const {status} = await axios.get(`http://super-mart-backend.vercel.app/user/activatepasswordreset/${token}`);
+   { const {status} = await axios.get(import.meta.env.VITE_SERVER_ADDRESS+`/user/activatepasswordreset/${token}`);
     if(status !== 200){
         navigate('/');
     }
@@ -43,7 +43,7 @@ export default function UpdatePassword() {
         return;
     }
     async function Fun(){
-      const {status,data} = await axios.post(`http://super-mart-backend.vercel.app/user/resetpassword`, {password: newPassword }, {withCredentials: true});
+      const {status,data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+`/user/resetpassword`, {password: newPassword }, {withCredentials: true});
       if(status === 200){
         alert("Password reset successful");
         navigate("/");

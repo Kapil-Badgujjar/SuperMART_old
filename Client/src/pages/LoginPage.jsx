@@ -2,10 +2,10 @@ import { useContext, useState, useEffect } from "react";
 import axios from 'axios';
 import "./StyleSheet.scss";
 import ButtonType1 from '../components/Button/ButtonType1'
-import { useNavigate, Link, Navigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Context from "../utils/context";
 export default function LoginPage() {
-  const {userName, setUserName, userID, setUserID, loginCode, setLoginType, setLoginCode} = useContext(Context);
+  const { setUserName, setUserID, loginCode, setLoginType, setLoginCode} = useContext(Context);
   const navigate = useNavigate();
   const [email, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -19,7 +19,7 @@ export default function LoginPage() {
   async function login(event) {
     event.preventDefault();
     if(email.trim().length > 0 && userPassword.trim().length > 0) {
-      const {data} = await axios.post(`http://super-mart-backend.vercel.app/user/login`,{email: email, password: userPassword},{withCredentials: true});
+      const {data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+`/user/login`,{email: email, password: userPassword},{withCredentials: true});
       console.log(data);
       if( data.code == 0) {
         setUserName(data.username);

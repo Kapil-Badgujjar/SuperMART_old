@@ -2,14 +2,14 @@ import React, { useContext, useEffect } from 'react'
 import './Success.scss'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
-import Context from '../../utils/context';
+// import Context from '../../utils/context';
 export default function Success() {
     const {userID} = useParams('userID');
     const navigate = useNavigate();
     // const {userID} = useContext(Context);
     useEffect(()=>{
         async function fun(){
-            const {status,data} = await axios.post('http://super-mart-backend.vercel.app/payments/order-successful', {userID: userID}, {withCredentials: true});
+            const {status,data} = await axios.post(import.meta.env.VITE_SERVER_ADDRESS+'/payments/order-successful', {userID: userID}, {withCredentials: true});
             console.log(data);
             if(status!=200){
                 navigate('/cancel');
